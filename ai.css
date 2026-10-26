@@ -1,0 +1,358 @@
+/* ── ASISTEN: panel di sisi kanan ── */
+.assistant {
+  width: 360px;
+  min-width: 360px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+.assistant.closed {
+  width: 0 !important;
+  min-width: 0 !important;
+  border-left: none !important;
+  overflow: hidden !important;
+}
+.assistant[hidden], .as-set[hidden], .as-set [hidden] { display: none !important; }
+
+.as-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 18px; border-bottom: 1px solid var(--border); }
+.as-title { min-width: 0; }
+.as-title b { display: flex; align-items: center; gap: 8px; font-family: var(--head); font-size: 1rem; }
+.as-ctx { display: block; max-width: 250px; margin-top: 2px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: .78rem; color: var(--text-muted); }
+.as-tools { display: flex; gap: 6px; }
+.as-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-light); }
+.as-dot.on { background: #12B76A; box-shadow: 0 0 0 3px rgba(18,183,106,.2); }
+.as-dot.off { background: var(--danger); }
+.as-close { display: inline-flex !important; cursor: pointer; }
+
+/* pengaturan */
+.as-set { display: flex; flex-direction: column; gap: 6px; padding: 14px 18px 16px; border-bottom: 1px solid var(--border); background: var(--bg-tertiary); }
+.as-set label { margin-top: 4px; font-size: .76rem; font-weight: 600; color: var(--text-secondary); }
+.as-set input[type="text"], .as-set input:not([type]) { width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-input); color: var(--text-primary); font: inherit; font-size: .85rem; outline: none; }
+.as-set select { width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-input); color: var(--text-primary); font: inherit; font-size: .85rem; outline: none; }
+.as-set input:focus, .as-set select:focus { border-color: var(--accent); }
+.as-set .as-chk { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-weight: 500; }
+.as-save { align-self: flex-start; margin-top: 8px; padding: 8px 16px; }
+.as-stat { min-height: 1em; font-size: .78rem; color: var(--text-secondary); }
+.as-links { display: flex; justify-content: space-between; gap: 10px; margin-top: 6px; padding-top: 10px; border-top: 1px solid var(--border); }
+.as-link { padding: 0; border: none; background: none; color: var(--text-secondary); font: 500 .8rem 'IBM Plex Sans', sans-serif; text-decoration: underline; cursor: pointer; }
+.as-link:hover { color: var(--text-primary); }
+.as-link.danger { color: var(--danger); }
+
+/* percakapan: kotak kartu rectangle sedikit bulat */
+.as-msgs { flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 16px; overflow-y: auto; }
+.as-m { font-size: .92rem; line-height: 1.65; overflow-wrap: anywhere; color: var(--text-primary); }
+
+/* Kotak Jawaban AI (Rectangle bergaris tipis, sudut sedikit bulat) */
+.as-m.bot {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* Kotak Pesan Pengguna (User) */
+.as-m.me {
+  align-self: flex-end;
+  max-width: 90%;
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-card));
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Indikator Mengetik / Berpikir */
+.as-m.wait {
+  align-self: flex-start;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 8px 14px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: .86rem;
+  letter-spacing: .02em;
+}
+
+.as-m.err {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border-left: 4px solid var(--danger);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+  font-size: .86rem;
+}
+.as-m pre { margin: 10px 0 2px; padding: 12px; overflow-x: auto; border-radius: 10px; background: var(--code-bg); font-size: .78rem; line-height: 1.5; }
+.as-m code { padding: 1px 5px; border-radius: 4px; background: var(--code-bg); font-size: .84em; }
+.as-m pre code { padding: 0; background: none; }
+
+.as-empty p { margin-bottom: 14px; font-size: .9rem; line-height: 1.6; color: var(--text-secondary); }
+.as-chip { display: block; width: 100%; margin-bottom: 8px; padding: 10px 14px; text-align: left; border: 1px solid var(--border); border-radius: 12px; background: transparent; color: var(--text-primary); font: 500 .86rem 'IBM Plex Sans', sans-serif; cursor: pointer; }
+.as-chip:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+/* Baris opsi pengiriman chat (selalu tersedia di atas input) */
+.as-chips-bar {
+  display: flex;
+  gap: 8px;
+  padding: 6px 14px 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+.as-chips-bar::-webkit-scrollbar { display: none; }
+.as-chip-pill {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font: 600 .76rem 'IBM Plex Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.as-chip-pill:hover {
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg-card));
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* kolom ketik */
+.as-in { display: flex; align-items: flex-end; gap: 8px; margin: 0 14px 14px; padding: 8px 8px 8px 14px; border: 1px solid var(--border-light); border-radius: 16px; background: var(--bg-input); }
+.as-in:focus-within { border-color: var(--accent); }
+.as-in textarea { flex: 1; max-height: 130px; padding: 6px 0; border: none; background: transparent; color: var(--text-primary); font: inherit; font-size: .92rem; line-height: 1.5; resize: none; outline: none; }
+.as-send { flex-shrink: 0; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border: none; border-radius: 50%; background: var(--grad-btn); color: #fff; cursor: pointer; }
+.as-send:hover { filter: brightness(1.08); }
+.as-send:disabled { opacity: .45; cursor: not-allowed; }
+
+/* Tab tepi untuk memunculkan kembali asisten saat disembunyikan */
+.as-tab {
+  display: none;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 899;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  padding: 16px 9px;
+  border: none;
+  border-radius: 12px 0 0 12px;
+  background: var(--grad-btn);
+  color: #fff;
+  font: 700 .82rem 'IBM Plex Sans', sans-serif;
+  letter-spacing: .04em;
+  cursor: pointer;
+  box-shadow: -2px 0 12px rgba(0,0,0,0.12);
+  transition: all 0.2s ease;
+}
+.as-tab:hover {
+  filter: brightness(1.1);
+  padding-right: 12px;
+}
+.assistant.closed ~ .as-tab {
+  display: block !important;
+}
+
+@media (max-width: 1180px) {
+  .assistant { position: fixed; top: 0; right: 0; bottom: 0; z-index: 900; width: min(380px, 92vw); min-width: 0; transform: translateX(100%); transition: transform .2s ease; box-shadow: -12px 0 40px rgba(15,27,51,.18); }
+  .assistant.open { transform: none; width: min(380px, 92vw) !important; min-width: 0 !important; }
+  .as-tab { display: block; }
+  .assistant.open ~ .as-tab { display: none !important; }
+}
+
+/* Indikator dinamis saat menunggu jawaban */
+.as-m.wait {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: .88rem;
+  letter-spacing: .02em;
+}
+
+/* Format rumus matematika rapi */
+.m-inline {
+  display: inline-block;
+  font-family: inherit;
+  padding: 0 1px;
+}
+.m-inline b, .m-block b {
+  font-weight: 700;
+  color: var(--accent);
+}
+.m-inline sub, .m-block sub {
+  font-size: 0.76em;
+  bottom: -0.2em;
+  color: var(--text-secondary);
+}
+.m-inline sup, .m-block sup {
+  font-size: 0.76em;
+  top: -0.3em;
+  color: var(--text-secondary);
+}
+.m-block {
+  margin: 12px 0;
+  padding: 12px 18px;
+  background: color-mix(in srgb, var(--accent) 7%, var(--bg-card));
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.96rem;
+  letter-spacing: .02em;
+  overflow-x: auto;
+}
+
+/* Tipografi Markdown Asisten */
+.as-h3 {
+  font-family: var(--head);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 18px 0 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border);
+}
+.as-h4 {
+  font-family: var(--head);
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 14px 0 6px;
+}
+.as-p {
+  margin: 6px 0;
+  line-height: 1.65;
+}
+.as-hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 16px 0;
+}
+.as-li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 4px 0;
+  line-height: 1.55;
+}
+.as-bullet {
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.as-li-text {
+  flex: 1;
+}
+
+/* Tabel Markdown Asisten */
+.as-tbl-wrap {
+  margin: 12px 0;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.as-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  text-align: left;
+}
+.as-tbl th {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-weight: 700;
+  padding: 9px 12px;
+  border-bottom: 2px solid var(--border);
+}
+.as-tbl td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.as-tbl tr:last-child td {
+  border-bottom: none;
+}
+.as-tbl tr:hover td {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+/* Kotak Kode Python (Latar belakang biru khas lokal) */
+.as-code-box {
+  margin: 14px 0;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  overflow: hidden;
+  background: var(--code-bg, #EEF3FC);
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.06);
+}
+
+.as-code-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 14px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg-card));
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.as-copy-btn {
+  background: var(--bg-card);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  color: var(--accent);
+  font: 600 0.74rem 'IBM Plex Sans', sans-serif;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.as-copy-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.as-code-box pre {
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 14px 16px !important;
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  font-family: 'IBM Plex Mono', Consolas, monospace !important;
+  font-size: 0.82rem !important;
+  line-height: 1.6 !important;
+  white-space: pre !important;
+  overflow-x: auto;
+}
+
+.as-code-box pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  font-family: inherit !important;
+  color: inherit !important;
+}
+
+/* Inline code diberi nuansa biru lembut */
+.as-m :not(pre) > code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg-card));
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--accent);
+  font-family: 'IBM Plex Mono', Consolas, monospace;
+  font-size: 0.84em;
+  font-weight: 600;
+}

@@ -1,0 +1,95 @@
+/* ============================================================
+   ML PATH — tema "sunrise": biru ke kuning, bersih dan sederhana
+   Urutan muat: styles.css → daily.css → theme.css → ai.css
+   ============================================================ */
+:root, [data-theme="light"] {
+  --sun: #FFC83D;
+  --grad: linear-gradient(110deg, #2563EB 0%, #4DA3FF 38%, #BFE3FF 60%, #FFE08A 80%, #FFC83D 100%);
+  --grad-hero: linear-gradient(110deg, #1E4FDB 0%, #2F7BFF 36%, #7DBBFF 60%, #FFE08A 84%, #FFC83D 100%);
+  --grad-btn: linear-gradient(135deg, #2563EB, #3B8CFF);
+  --grad-v: linear-gradient(180deg, #2563EB, #FFC83D);
+  --bg-primary: #F5F8FD; --bg-secondary: #FFFFFF; --bg-tertiary: #EDF2FB;
+  --bg-card: #FFFFFF; --bg-card-hover: #F3F7FE; --bg-input: #F5F8FD; --bg-chat: transparent;
+  --bg-msg-user: #2563EB; --bg-msg-ai: #EDF2FB;
+  --text-primary: #0F1B33; --text-secondary: #465670; --text-muted: #77839A;
+  --border: #E2E9F4; --border-light: #C9D5EA;
+  --accent: #2563EB; --accent-hover: #1D4FD1; --on-accent: #FFFFFF;
+  --success: #0E9F72; --warning: #B7791F; --danger: #D1435B;
+  --shadow: rgba(37,99,235,.14); --code-bg: #EEF3FC;
+  --scrollbar-thumb: #C9D5EA; --scrollbar-track: transparent;
+  --head: 'Plus Jakarta Sans', 'IBM Plex Sans', system-ui, sans-serif;
+}
+[data-theme="dark"] {
+  --sun: #FFD35A;
+  --bg-primary: #0A111F; --bg-secondary: #0F182B; --bg-tertiary: #162340;
+  --bg-card: #111C33; --bg-card-hover: #17254A; --bg-input: #0C1527; --bg-chat: transparent;
+  --bg-msg-user: #3B82F6; --bg-msg-ai: #162340;
+  --text-primary: #EAF1FF; --text-secondary: #B6C4DE; --text-muted: #7F90B0;
+  --border: #1E2D4D; --border-light: #2A3F69;
+  --accent: #6AA5FF; --accent-hover: #8FBBFF; --on-accent: #0A111F;
+  --success: #3DD6A8; --warning: #F2B84B; --danger: #FF7A90;
+  --shadow: rgba(0,0,0,.45); --code-bg: #0B1426;
+  --scrollbar-thumb: #2A3F69;
+}
+
+body { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 15px; background: var(--bg-primary); color: var(--text-primary); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, .logo-text { font-family: var(--head); }
+code, pre { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+::selection { background: var(--sun); color: #0F1B33; }
+
+/* ── Tombol: satu tombol utama, sisanya tenang ── */
+.btn-primary, .btn-send, .model-badge { background: var(--grad-btn); color: #FFFFFF; border: none; font-weight: 700; }
+.btn-primary { padding: 10px 20px; border-radius: 10px; font: 700 .9rem 'IBM Plex Sans', sans-serif; cursor: pointer; transition: filter .15s; }
+.btn-primary:hover, .btn-send:hover { filter: brightness(1.07); background: var(--grad-btn); transform: none; }
+.btn-primary:disabled { opacity: .4; cursor: not-allowed; filter: none; }
+.btn-ghost-d { display: inline-block; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--border-light); background: transparent; color: var(--text-primary); font: 600 .84rem 'IBM Plex Sans', sans-serif; cursor: pointer; text-decoration: none; }
+.btn-ghost-d:hover { background: var(--bg-card-hover); border-color: var(--accent); text-decoration: none; }
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font: 400 1.3rem/1 'IBM Plex Sans', sans-serif; cursor: pointer; }
+.icon-btn:hover:not(:disabled) { background: var(--bg-tertiary); color: var(--text-primary); }
+.icon-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+/* ── Sidebar: terang, tenang ── */
+.sidebar { width: 264px; min-width: 264px; background: var(--bg-secondary); border-right: 1px solid var(--border); color: var(--text-primary); }
+.sidebar-header { padding: 20px 18px 14px; border-bottom: none; }
+.logo { gap: 10px; }
+.logo-icon { display: block; flex-shrink: 0; }
+.logo-text { font-size: 1rem; font-weight: 800; line-height: 1.2; color: var(--text-primary); }
+.progress-summary { padding: 0 18px 16px; border-bottom: none; }
+.progress-bar-container { height: 6px; background: var(--bg-tertiary); }
+.progress-bar { background: var(--grad); }
+.progress-label { font-size: .76rem; color: var(--text-muted); }
+.nav-quick { padding: 0 10px; gap: 2px; }
+#dashboardView { height: 100vh; overflow-y: auto; }
+.sidebar-nav { border-top: 1px solid var(--border); margin-top: 12px; }
+.nav-icon { display: none; }
+.sidebar .nav-item, .nav-quick .nav-item { padding: 9px 12px; border-radius: 10px; color: var(--text-secondary); font-weight: 500; background-color: transparent; }
+.sidebar .nav-item:hover, .nav-quick .nav-item:hover { background-color: var(--bg-tertiary); color: var(--text-primary); }
+.sidebar .nav-item.active, .nav-quick .nav-item.active {
+  background: linear-gradient(180deg, #2563EB, #FFC83D) left center / 3px 60% no-repeat, color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent); font-weight: 700; }
+.nav-item-text { font-size: .87rem; }
+.sidebar-nav { flex: 1; overflow-y: auto; padding: 4px 10px 12px; }
+.s-phase { display: flex; justify-content: space-between; padding: 14px 8px 6px; font: 700 .78rem var(--head); color: var(--text-secondary); }
+.s-phase span:last-child { font-weight: 600; color: var(--text-muted); }
+.s-day { display: flex; align-items: center; gap: 9px; width: 100%; padding: 7px 8px; border: none; border-radius: 8px; background: transparent; color: var(--text-secondary); font: 500 .82rem/1.35 'IBM Plex Sans', sans-serif; text-align: left; cursor: pointer; }
+.s-day:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+.s-day.sel { background: linear-gradient(180deg, #2563EB, #FFC83D) left center / 3px 60% no-repeat, color-mix(in srgb, var(--accent) 10%, transparent); color: var(--text-primary); font-weight: 700; }
+.s-dot { flex-shrink: 0; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--border-light); border-radius: 50%; color: #fff; font-size: .6rem; }
+.s-day.now .s-dot { border-color: var(--sun); box-shadow: 0 0 0 2px color-mix(in srgb, var(--sun) 35%, transparent); }
+.s-day.ok .s-dot { background: var(--grad-btn); border-color: transparent; }
+.s-name { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.s-count { flex-shrink: 0; font-size: .7rem; color: var(--text-muted); }
+.sidebar-footer { padding: 10px 14px 14px; border-top: 1px solid var(--border); flex-direction: row; }
+
+/* ── Layar sempit: sidebar jadi bilah atas ── */
+@media (max-width: 800px) {
+  .app-container { flex-direction: column; height: auto; min-height: 100vh; overflow: visible; }
+  .sidebar { width: 100%; min-width: 0; border-right: none; border-bottom: 1px solid var(--border); }
+  .sidebar-nav { display: none; }
+  #dashboardView { height: auto; }
+  .main-content { overflow: visible; }
+  #dailyView { height: auto; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

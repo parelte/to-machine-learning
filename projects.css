@@ -1,0 +1,46 @@
+/* ── PROYEK: daftar tenang, satu kartu per tahap ───────────── */
+#projectsView { height: 100vh; overflow-y: auto; }
+.pj-head { padding: 4px 4px 0; }
+.pj-head h1 { font: 800 1.9rem var(--head); letter-spacing: -.02em; }
+.pj-head p { margin-top: 6px; font-size: .92rem; }
+
+.pj-phase h3 { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 0 4px 10px; font: 700 .9rem var(--head); color: var(--text-secondary); }
+.pj-phase h3 span { font: 500 .78rem 'IBM Plex Sans', sans-serif; color: var(--text-muted); white-space: nowrap; }
+.pj-card { padding: 0; overflow: hidden; }
+.pj-item + .pj-item { border-top: 1px solid var(--border); }
+
+.pj-row { display: flex; align-items: center; gap: 14px; padding: 16px 20px; cursor: pointer; }
+.pj-row:hover { background: var(--bg-card-hover); }
+.pj-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; padding: 0; border: none; background: none; color: var(--text-primary); text-align: left; font: inherit; cursor: pointer; }
+.pj-main b { font-size: .98rem; font-weight: 600; }
+.pj-main span { font-size: .84rem; line-height: 1.5; color: var(--text-muted); }
+.pj-when { flex-shrink: 0; font-size: .78rem; color: var(--text-muted); white-space: nowrap; }
+.pj-when.ready { color: var(--accent); font-weight: 600; }
+
+/* status: lingkaran kosong, setengah, penuh */
+.pj-st { flex-shrink: 0; position: relative; width: 22px; height: 22px; padding: 0; border: 2px solid var(--border-light); border-radius: 50%; background: transparent; cursor: pointer; }
+.pj-st:hover { border-color: var(--accent); }
+.pj-st.doing { border-color: var(--accent); }
+.pj-st.doing::after { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: linear-gradient(90deg, var(--accent) 50%, transparent 50%); }
+.pj-st.done { border-color: var(--accent); background: var(--accent); }
+.pj-st.done::after { content: ''; position: absolute; left: 6px; top: 2px; width: 5px; height: 10px; border: solid var(--on-accent, #fff); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+.pj-body { padding: 0 20px 20px 56px; }
+.pj-body[hidden] { display: none; }
+.pj-body h4 { margin-bottom: 8px; font-size: .78rem; font-weight: 700; color: var(--text-muted); }
+.pj-body ul { margin: 0 0 14px 18px; }
+.pj-body li { margin-bottom: 4px; font-size: .9rem; line-height: 1.6; }
+.pj-body dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; margin-bottom: 16px; font-size: .86rem; }
+.pj-body dt { color: var(--text-muted); }
+.pj-body dd { color: var(--text-secondary); }
+.pj-link { display: flex; align-items: center; gap: 12px; }
+.pj-link input { flex: 1; min-width: 0; padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-input); color: var(--text-primary); font: inherit; font-size: .86rem; outline: none; }
+.pj-link input:focus { border-color: var(--accent); }
+.pj-link a[hidden] { display: none; }
+
+@media (max-width: 800px) { #projectsView { height: auto; } }
+@media (max-width: 700px) {
+  .pj-row { padding: 14px; gap: 12px; }
+  .pj-body { padding: 0 14px 16px 14px; }
+  .pj-when { display: none; }
+}

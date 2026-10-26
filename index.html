@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To Machine Learning</title>
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="alternate icon" href="logo.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="daily.css">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="ai.css">
+<link rel="stylesheet" href="projects.css">
+</head>
+<body>
+
+<!-- Main App -->
+<div id="app" class="app-container" style="display:none;">
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E4FDB"/><stop offset=".5" stop-color="#3D8BFF"/><stop offset=".8" stop-color="#FFE08A"/><stop offset="1" stop-color="#FFC83D"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M7 21l6-6 4 4 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="logo-text">To Machine Learning</span>
+      </div>
+      <button id="toggleSidebar" class="icon-btn sidebar-toggle" title="Sembunyikan menu" aria-label="Sembunyikan menu">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+    </div>
+    
+    <div class="progress-summary" id="progressSummary">
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="globalProgress"></div>
+      </div>
+      <span class="progress-label" id="progressLabel"></span>
+    </div>
+
+    <div class="nav-quick">
+      <button type="button" class="nav-item" id="navDaily"><span class="nav-icon"></span><span class="nav-item-text">Belajar Harian</span></button>
+      <button type="button" class="nav-item" id="navDash"><span class="nav-icon"></span><span class="nav-item-text">Progres</span></button>
+      <button type="button" class="nav-item" id="navProj"><span class="nav-icon"></span><span class="nav-item-text">Proyek</span></button>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+      <!-- Curriculum categories injected here -->
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="toggleTheme" class="icon-btn" title="Ganti tema" aria-label="Ganti tema"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+  </aside>
+  <button id="sidebarTab" class="sidebar-tab" title="Buka menu" aria-label="Buka menu" style="display:none;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg><span>Menu</span></button>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div id="dailyView" class="view active"></div>
+
+    <!-- Progres -->
+    <div id="dashboardView" class="view"></div>
+
+    <!-- Proyek -->
+    <div id="projectsView" class="view"></div>
+  </main>
+
+  <!-- Asisten: selalu di sisi kanan -->
+  <aside id="assistant" class="assistant" aria-label="Asisten belajar">
+    <header class="as-head">
+      <div class="as-title">
+        <b><i id="aiDot" class="as-dot"></i>Asisten</b>
+        <span id="aiCtx" class="as-ctx"></span>
+      </div>
+      <div class="as-tools">
+        <button id="aiSetBtn" class="icon-btn" title="Pengaturan" aria-label="Pengaturan"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+        <button id="aiClose" class="icon-btn as-close" title="Sembunyikan asisten" aria-label="Sembunyikan asisten"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+    </header>
+    <div id="aiSet" class="as-set" hidden>
+      <label for="aiProv">Penyedia AI</label>
+      <select id="aiProv">
+        <option value="auto">Cloud</option>
+        <option value="local">Lokal</option>
+      </select>
+      <div id="aiEpBox" hidden>
+        <label for="aiEp">Alamat server</label>
+        <input id="aiEp" placeholder="http://127.0.0.1:8080/v1" autocomplete="off">
+      </div>
+      <div id="aiKeyBox">
+        <label for="aiKey">API key Asisten</label>
+        <input id="aiKey" type="password" placeholder="Masukkan API key..." autocomplete="off" spellcheck="false">
+      </div>
+      <div id="aiLmBox">
+        <label for="aiLm">Nama model</label>
+        <input id="aiLm" list="aiModels" placeholder="Otomatis" autocomplete="off">
+        <datalist id="aiModels"></datalist>
+      </div>
+      <p id="aiWarn" class="as-stat" hidden></p>
+      <button id="aiSave" class="btn-primary as-save">Simpan</button>
+      <p id="aiStat" class="as-stat"></p>
+      <div class="as-links">
+        <button id="aiClr" class="as-link">Hapus chat hari ini</button>
+        <button id="aiKeyDel" class="as-link" hidden>Hapus key</button>
+        <button id="aiReset" class="as-link danger">Reset semua progres</button>
+      </div>
+    </div>
+    <div id="aiMsgs" class="as-msgs"></div>
+    <div id="aiChips" class="as-chips-bar"></div>
+    <div class="as-in">
+      <textarea id="aiInput" rows="1" placeholder="Tanya soal materi tahap ini..."></textarea>
+      <button id="aiSend" class="as-send" aria-label="Kirim"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+    </div>
+  </aside>
+  <button id="aiTab" class="as-tab" aria-label="Buka asisten">Asisten</button>
+</div>
+
+<script src="db-sync.js"></script>
+<script src="local-ai.js"></script>
+<script src="app.js"></script>
+<script src="daily-curriculum.js"></script>
+<script src="daily-extra.js"></script>
+<script src="daily.js"></script>
+<script src="daily-ai.js"></script>
+<script src="projects.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# File rahasia (JANGAN PERNAH DI-UPLOAD KE GITHUB)
+api-key.txt
+*.key
+.env
+
+# Database lokal & catatan progres pribadi
+progress.db
+progress.db-journal
+*.db
+*.sqlite3
+
+# Python cache & lingkungan virtual
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# Sistem operasi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Log
+*.log

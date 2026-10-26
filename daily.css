@@ -1,0 +1,111 @@
+/* ── BELAJAR HARIAN: satu kolom, satu kartu hari ───────────── */
+#dailyView { height: 100vh; overflow-y: auto; }
+.d-wrap { max-width: 880px; margin: 0 auto; padding: 28px 32px 80px; display: flex; flex-direction: column; gap: 20px; }
+.muted { color: var(--text-muted); }
+.small { font-size: .82rem; }
+
+/* header berwarna: teks di sisi biru, kartu putih di sisi kuning */
+.d-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px 28px; padding: 28px 32px; border-radius: 22px; background: var(--grad-hero); color: #FFFFFF; }
+.d-head h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.05; color: #FFFFFF; }
+.d-head h1 span { margin-left: 8px; font-size: 1.05rem; font-weight: 600; opacity: .85; }
+.d-head p { margin-top: 8px; font-size: .95rem; color: rgba(255,255,255,.96); }
+.d-stats { display: flex; gap: 10px; flex-wrap: wrap; }
+.d-stat { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 14px; background: rgba(255,255,255,.93); color: #0F1B33; }
+.d-stat b { display: block; font-size: .88rem; }
+.d-stat span { font-size: .76rem; color: #52627E; }
+.d-stat .flame-icon { display: flex; line-height: 0; color: #A6B2C6; }
+.d-stat.alive .flame-icon { color: #F59E0B; animation: flicker 1.4s infinite alternate; }
+.d-stat.risk .flame-icon { color: #E86A33; }
+@keyframes flicker { from { transform: scale(1) rotate(-3deg); } to { transform: scale(1.1) rotate(3deg); } }
+
+.d-banner { padding: 12px 16px; border-radius: 12px; border-left: 4px solid var(--sun); background: color-mix(in srgb, var(--sun) 16%, transparent); font-weight: 600; }
+.d-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 26px 28px; }
+
+/* judul hari + navigasi */
+.d-day-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+.d-day-title { min-width: 0; }
+.d-phase-tag { font-size: .8rem; font-weight: 600; color: var(--text-muted); }
+.d-day-title h2 { margin-top: 4px; font-size: 1.6rem; font-weight: 800; line-height: 1.2; letter-spacing: -.01em; }
+.d-nav { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+/* video */
+.c-video { aspect-ratio: 16 / 9; background: #000; border-radius: 14px; overflow: hidden; }
+.c-video iframe { width: 100%; height: 100%; border: 0; display: block; }
+.c-novideo { background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+.c-novideo p { margin: 6px 0 14px; }
+.c-vbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; font-size: .84rem; color: var(--text-secondary); }
+.d-link { margin-left: 6px; font-weight: 600; font-size: .82rem; white-space: nowrap; }
+
+/* progres hari ini */
+.d-prog { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
+.d-bar { flex: 1; height: 6px; background: var(--bg-tertiary); border-radius: 6px; overflow: hidden; }
+.d-bar > div { height: 100%; border-radius: 6px; background: var(--grad); transition: width .4s; }
+
+/* tab */
+.c-tabs { display: flex; gap: 4px; margin-top: 14px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+.c-tab { position: relative; padding: 10px 14px; background: transparent; border: none; color: var(--text-secondary); font: 500 .9rem 'IBM Plex Sans', sans-serif; cursor: pointer; white-space: nowrap; }
+.c-tab:hover { color: var(--text-primary); }
+.c-tab.on { color: var(--text-primary); font-weight: 700; }
+.c-tab.on::after { content: ''; position: absolute; left: 10px; right: 10px; bottom: -1px; height: 3px; border-radius: 3px; background: var(--grad); }
+
+/* isi */
+.d-section { margin-top: 22px; }
+.d-section h4 { margin-bottom: 10px; font-size: .86rem; font-weight: 700; color: var(--text-secondary); }
+.d-section p { margin-bottom: 8px; font-size: 1rem; line-height: 1.75; max-width: 68ch; }
+.d-section p.small { font-size: .86rem; }
+.c-res { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary); font-size: .9rem; text-decoration: none; }
+.c-res:hover { background: var(--bg-card-hover); border-color: var(--border-light); }
+.d-meta { padding: 1px 8px; border-radius: 10px; background: var(--bg-tertiary); color: var(--text-muted); font-size: .7rem; }
+.d-code { position: relative; }
+.d-code pre { padding: 16px; overflow-x: auto; border-radius: 12px; background: var(--code-bg); font-size: .82rem; line-height: 1.55; }
+.d-copy { position: absolute; top: 8px; right: 8px; padding: 4px 10px; border: 1px solid var(--border-light); border-radius: 8px; background: var(--bg-card); color: var(--text-secondary); font: 600 .74rem 'IBM Plex Sans', sans-serif; cursor: pointer; }
+.d-copy:hover { color: var(--accent); border-color: var(--accent); }
+
+/* tugas */
+.d-task { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 6px; padding: 11px 14px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; }
+.d-task:hover { background: var(--bg-card-hover); }
+.d-task.on { background: color-mix(in srgb, var(--accent) 8%, transparent); border-color: color-mix(in srgb, var(--accent) 35%, var(--border)); }
+.d-task.on .d-text { color: var(--text-muted); text-decoration: line-through; }
+.d-box { flex-shrink: 0; width: 20px; height: 20px; margin-top: 1px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--border-light); border-radius: 6px; color: #fff; font-size: .72rem; }
+.d-task.on .d-box { background: var(--grad-btn); border-color: transparent; }
+.d-text { font-size: .9rem; line-height: 1.55; }
+
+/* kuis dan catatan */
+.c-q { margin-bottom: 18px; }
+.c-q p { margin-bottom: 8px; }
+.c-opt { display: block; width: 100%; margin-bottom: 6px; padding: 10px 14px; text-align: left; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); color: var(--text-primary); font: inherit; font-size: .9rem; cursor: pointer; }
+.c-opt:hover { border-color: var(--accent); }
+.c-opt.pick { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.c-opt.right { border-color: var(--success); background: color-mix(in srgb, var(--success) 12%, transparent); }
+.c-opt.wrong { border-color: var(--danger); background: color-mix(in srgb, var(--danger) 10%, transparent); }
+.c-err { margin-bottom: 8px; color: var(--danger); font-size: .86rem; }
+.d-notes { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-input); color: var(--text-primary); font: inherit; font-size: .92rem; line-height: 1.6; resize: vertical; outline: none; }
+.d-notes:focus { border-color: var(--accent); }
+
+@media (max-width: 700px) {
+  .d-wrap { padding: 16px 14px 60px; }
+  .d-head { padding: 22px 20px; }
+  .d-head h1 { font-size: 2rem; }
+  .d-card { padding: 18px; }
+  .d-day-top { flex-direction: column; }
+}
+
+/* checklist per kelompok */
+.d-group { margin-bottom: 18px; }
+.d-group h4 { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: .86rem; font-weight: 700; color: var(--text-secondary); }
+.d-group h4 span { font-weight: 600; color: var(--text-muted); }
+
+/* halaman progres */
+.p-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.p-stats .d-card { padding: 16px 18px; }
+.p-stats b { display: block; font: 800 1.45rem var(--head); }
+.p-stats span { font-size: .8rem; color: var(--text-muted); }
+.d-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 14px; }
+.d-charts .d-card { padding: 20px 22px; }
+.d-card h3 { margin-bottom: 12px; font: 700 .95rem var(--head); }
+.d-charts canvas { display: block; width: 100%; height: 210px; }
+.d-charts p { margin: 8px 0 0; font-size: .78rem; }
+.d-phase { margin-bottom: 14px; }
+.d-phase:last-child { margin-bottom: 0; }
+.d-phase-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 4px; font-size: .86rem; }
+@media (max-width: 700px) { .d-charts { grid-template-columns: 1fr; } }
